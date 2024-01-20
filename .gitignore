@@ -1,2 +1,3 @@
 transformers-benchmarks/
 *.csv
+!results/*.csv

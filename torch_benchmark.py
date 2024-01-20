@@ -22,7 +22,9 @@ def test_example(model_name, args):
 
     for prop in {"device", "flops", "params", "timing"}:
         assert prop in results
-    print(yaml.dump(results))
+
+    # print(yaml.dump(results))
+    
     # return DataFrame is one column. including rows of each metric
     return pd.DataFrame(
         index = ['model_name', 'params', f'batch={args.batch_size}_latency', f'batches={args.batch_size}_per_second'], 
