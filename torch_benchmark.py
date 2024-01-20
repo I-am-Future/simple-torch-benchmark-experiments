@@ -22,20 +22,20 @@ def test_example(model_name, args):
 
     for prop in {"device", "flops", "params", "timing"}:
         assert prop in results
-
+    print(yaml.dump(results))
     # return DataFrame is one column. including rows of each metric
     return pd.DataFrame(
         index = ['model_name', 'params', f'batch={args.batch_size}_latency', f'batches={args.batch_size}_per_second'], 
         data = [model_name, results['params'], 
-                results['timing']['batch_size_8']['on_device_inference']['human_readable']['batch_latency'], 
-                results['timing']['batch_size_8']['on_device_inference']['human_readable']['batches_per_second']]
+                results['timing'][f'batch_size_{args.batch_size}']['total']['human_readable']['batch_latency'], 
+                results['timing'][f'batch_size_{args.batch_size}']['total']['human_readable']['batches_per_second']]
     )
 
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--batch_size', type=int, default=8)
-    parser.add_argument('--num_runs', type=int, default=10)
+    parser.add_argument('--batch_size', type=int, default=32)
+    parser.add_argument('--num_runs', type=int, default=100)
     parser.add_argument('--tests', nargs='+', default=['resnet18', 'resnet101'])
     return parser.parse_args()
 
