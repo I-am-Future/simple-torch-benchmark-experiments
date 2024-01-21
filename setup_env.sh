@@ -24,5 +24,7 @@ pip install pytorch-benchmark
 
 conda install matplotlib pandas -y
 
+conda install ipykernel --update-deps --force-reinstall
+
 # # Clone the repositories
 # git clone https://github.com/mli/transformers-benchmarks.git
