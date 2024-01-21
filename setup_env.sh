@@ -22,5 +22,7 @@ conda install pytorch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1 pytorch-cuda=
 
 pip install pytorch-benchmark
 
-# Clone the repositories
-git clone https://github.com/mli/transformers-benchmarks.git
+conda install matplotlib pandas -y
+
+# # Clone the repositories
+# git clone https://github.com/mli/transformers-benchmarks.git
