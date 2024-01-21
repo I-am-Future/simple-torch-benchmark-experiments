@@ -2,3 +2,4 @@ transformers-benchmarks/
 *.csv
 !results/*.csv
 transformers/
+miniconda.sh
