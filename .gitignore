@@ -4,3 +4,9 @@ transformers-benchmarks/
 !train_benchmark/*.csv
 transformers/
 miniconda.sh
+*.ipynb_checkpoints/
+*.pyc
+.vector_cache/
+*.pth
+*.log
+!results/*.log

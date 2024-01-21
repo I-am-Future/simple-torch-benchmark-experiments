@@ -26,6 +26,8 @@ pip install pytorch-benchmark
 
 conda install matplotlib pandas -y
 
+conda install torchtext -c pytorch -y
+
 conda install ipykernel --update-deps --force-reinstall
 
 # # Clone the repositories

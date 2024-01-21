@@ -7,7 +7,6 @@ Mar. 31st, 2023
 import os
 import logging
 import time
-from torch.utils.tensorboard import SummaryWriter
 
 class CONFIG:
     ''' A general class, which can record configs, do logging to the file, and tensorboard'''
@@ -16,7 +15,7 @@ class CONFIG:
         self._config = configs
         
         # maybe only good for linux/macos
-        logfile = os.path.join(self._config['work_dir'], f'{time.ctime()}.log')
+        logfile = os.path.join(self._config['work_dir'], f'{time.ctime().replace(" ", "-").replace(":", "_")}.log')
 
         file_handler = logging.FileHandler(logfile)
         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -28,6 +27,7 @@ class CONFIG:
         self._logger = logger
 
         if configs.get('enable_tb', False):
+            from torch.utils.tensorboard import SummaryWriter
             self.log_string('We have tensorboard enabled.')
             self._writer = SummaryWriter(self._config['work_dir'])
 

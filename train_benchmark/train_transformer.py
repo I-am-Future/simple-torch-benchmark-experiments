@@ -25,7 +25,6 @@ import torch
 from torch import nn
 from torch.nn.utils.rnn import pad_sequence
 from torch.utils.data import DataLoader, Dataset
-from torch.utils.tensorboard import SummaryWriter
 
 import torchtext
 from torchtext.vocab import GloVe 
@@ -46,8 +45,9 @@ torch.manual_seed(seed)
 
 configs = {
     'work_dir': '.', 
-    'device': 'cuda:5', # we have 8 GPUs!
+    'device': 'cuda:0',
     'batch_size': 16, 
+    'num_workers': 0 if sys.platform=='win32' else 2, # for dataloader
     'train_ratio': 0.7, 
     'optimizer_config': {
         'lr': 5e-4, 
@@ -60,12 +60,12 @@ configs = {
         'warmup_steps': 5,
         'warmup_start_lr': 1e-5
     }, 
-    'total_epoch': 20, 
+    'total_epoch': 15, 
     'glove_name': '6B', 
     'glove_dim': 200,
     'model_config': {
         'hidden_units': 200, 
-        'num_layers': 4, 
+        'num_layers': 8, 
         'dropout_rate': 0.25
     }, 
     'enable_tb': False
@@ -143,17 +143,17 @@ train_set, val_set = torch.utils.data.random_split(train_set, [train_size, val_s
 train_dataloader = DataLoader(train_set,
                 batch_size=configs['batch_size'],
                 shuffle=True,
-                num_workers=2, 
+                num_workers=configs['num_workers'], 
                 collate_fn=collate_fn_train)
 val_dataloader = DataLoader(val_set,
                 batch_size=configs['batch_size'],
                 shuffle=True,
-                num_workers=2, 
+                num_workers=configs['num_workers'], 
                 collate_fn=collate_fn_train)
 test_dataloader = DataLoader(test_set,
                 batch_size=configs['batch_size'],
                 shuffle=False,
-                num_workers=2, 
+                num_workers=configs['num_workers'], 
                 collate_fn=collate_fn_test)
 
 
@@ -201,7 +201,7 @@ for epoch in range(total_epoch):
     model.train()
     train_loss_sum = 0
     train_correct = 0
-    for _, x, y in train_dataloader: # the first one is "id", which is no use in training!
+    for _, x, y in tqdm.tqdm(train_dataloader): # the first one is "id", which is no use in training!
         x, y = x.to(configs['device']), y.to(configs['device'])
 
         y_hat = model(x).squeeze(-1)
@@ -221,7 +221,7 @@ for epoch in range(total_epoch):
     val_loss_sum = 0
     val_correct = 0
     with torch.no_grad():
-        for _, x, y in val_dataloader: # the first one is "id", which is no use in validation!
+        for _, x, y in tqdm.tqdm(val_dataloader): # the first one is "id", which is no use in validation!
             x, y = x.to(configs['device']), y.to(configs['device'])
 
             y_hat = model(x).squeeze(-1)
@@ -240,13 +240,13 @@ for epoch in range(total_epoch):
     torch.save(model.state_dict(), pt_path)
 
     epoch_end_time = datetime.datetime.now()
-    duration = (epoch_end_time - epoch_start_time).seconds
+    duration = (epoch_end_time - epoch_start_time).total_seconds()
 
     if val_acc > best_acc:
         best_acc = val_acc # I added here.
         pt_path = os.path.join(configs["work_dir"], 'best.pth')
         torch.save(model.state_dict(), pt_path)
-        configs.log_string(f'{time.ctime()}: epoch {epoch+1}/{total_epoch}, duration={duration} train_loss={train_loss:.4f}, train_acc={train_acc:.4f}, val_loss={val_loss:.4f}, val_acc={val_acc:.4f}, saving model.')
+        configs.log_string(f'epoch {epoch+1}/{total_epoch}, duration={duration}s train_loss={train_loss:.4f}, train_acc={train_acc:.4f}, val_loss={val_loss:.4f}, val_acc={val_acc:.4f}, saving model.')
     else:
-        configs.log_string(f'{time.ctime()}: epoch {epoch+1}/{total_epoch}, duration={duration} train_loss={train_loss:.4f}, train_acc={train_acc:.4f}, val_loss={val_loss:.4f}, val_acc={val_acc:.4f}, ')
+        configs.log_string(f'epoch {epoch+1}/{total_epoch}, duration={duration}s train_loss={train_loss:.4f}, train_acc={train_acc:.4f}, val_loss={val_loss:.4f}, val_acc={val_acc:.4f}, ')
     
