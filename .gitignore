@@ -1,5 +1,6 @@
 transformers-benchmarks/
 *.csv
 !results/*.csv
+!train_benchmark/*.csv
 transformers/
 miniconda.sh
