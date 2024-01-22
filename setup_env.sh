@@ -1,14 +1,14 @@
 #!/bin/bash
 
-# Download and install Miniconda
-# If meet certificate problem, use --no-check-certificate
-# wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-py310_23.9.0-0-Linux-x86_64.sh -O miniconda.sh
-wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-py310_23.9.0-0-Linux-x86_64.sh --no-check-certificate -O miniconda.sh
-bash miniconda.sh -b -p $HOME/miniconda
+# # Download and install Miniconda, Uncomment it if necessary.
+# # If meet certificate problem, use --no-check-certificate
+# # wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-py310_23.9.0-0-Linux-x86_64.sh -O miniconda.sh
+# wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-py310_23.9.0-0-Linux-x86_64.sh --no-check-certificate -O miniconda.sh
+# bash miniconda.sh -b -p $HOME/miniconda
 
-# Initialize Conda
-source $HOME/miniconda/etc/profile.d/conda.sh
-conda init
+# # Initialize Conda
+# source $HOME/miniconda/etc/profile.d/conda.sh
+# conda init
 
 # Name of the conda environment
 ENV_NAME="pytorch_benchmark"
