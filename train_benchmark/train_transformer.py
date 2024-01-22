@@ -1,8 +1,8 @@
 # ## Use Glove in Pytorch to Finish NLP task - sentiment analysis
 # Presented by: Shunlin Lu   
+# Assignment 2 Template of DDA4220, 2023 Spring
 # 
 # Modified by: Lai Wei
-# For assignment2 use, a template version.
 
 # *   Wikipedia+gigaword（6B）
 # *   crawler（42B）
