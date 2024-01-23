@@ -65,11 +65,45 @@ sh setup_env.sh
 
 ## 3. TFLOPS Benchmark
 
-**Description:** 
+**Goal:** Compare **basic calculation performance** differences on different environment.
 
-**Goal:** 
+**Method:** Timing for basic tensor operations, code is at first section of `micro_bench.ipynb`.
 
-**Method:** 
+Results are at `results\micro_bench-<Env>.ipynb`.
+
++ Results (Element-wise Matrix Multiplication):
+
+Multiply a `n x n` matrix by 1.2 (`1.2 * a`).  
+
+|        TFLOPS | n=128 |  n=512 | n=2048 | n=8192 |
+| ------------: | ----: | -----: | -----: | ------ |
+| **Windows11** |       |        |        |        |
+| torch.float32 | 0.142 |  5.282 |  7.110 | 8.935  |
+| torch.float16 | 0.134 |  6.823 | 23.234 | 25.453 |
+|      **WSL2** |       |        |        |        |
+| torch.float32 | 0.072 |  5.533 |  7.392 | 9.359  |
+| torch.float16 | 0.246 | 11.542 | 24.641 | 26.478 |
+|    **Docker** |       |        |        |        |
+| torch.float32 | 0.203 |  5.546 |  7.391 | 9.304  |
+| torch.float16 | 0.055 |  9.246 | 24.469 | 26.654 |
+
++ Results (TFLOPS):
+
+Multiply a `n x n` matrix by 1.2 (`1.2 * a`).  
+
+|        TFLOPS | n=65536 | n=262144 | n=1048576 | n=4194304 |
+| ------------: | ------: | -------: | --------: | --------- |
+| **Windows11** |         |          |           |           |
+|        TFLOPS |   0.003 |    0.012 |     0.036 | 0.039     |
+|          GB/s |  21.692 |   93.016 |   290.520 | 308.859   |
+|      **WSL2** |         |          |           |           |
+|        TFLOPS |   0.002 |    0.010 |     0.037 | 0.040     |
+|          GB/s |  13.653 |   82.898 |   293.531 | 323.947   |
+|    **Docker** |         |          |           |           |
+|        TFLOPS |   0.004 |    0.019 |     0.037 | 0.040     |
+|          GB/s |  34.424 |  148.973 |   292.299 | 323.464   |
+
+**Conclusion:** For three environments, there are no big difference in the TFLOPS and bandwidth performance. 
 
 
 
