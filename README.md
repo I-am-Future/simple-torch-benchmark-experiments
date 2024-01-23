@@ -71,9 +71,9 @@ sh setup_env.sh
 
 Results are at `results\micro_bench-<Env>.ipynb`.
 
-+ Results (Element-wise Matrix Multiplication):
++ Results (Matrix Multiplication):
 
-Multiply a `n x n` matrix by 1.2 (`1.2 * a`).  
+Multiply two `n x n` matrices (`a @ b`).  
 
 |        TFLOPS | n=128 |  n=512 | n=2048 | n=8192 |
 | ------------: | ----: | -----: | -----: | ------ |
@@ -87,7 +87,7 @@ Multiply a `n x n` matrix by 1.2 (`1.2 * a`).
 | torch.float32 | 0.203 |  5.546 |  7.391 | 9.304  |
 | torch.float16 | 0.055 |  9.246 | 24.469 | 26.654 |
 
-+ Results (TFLOPS):
++ Results (Element-wise Matrix Multiplication):
 
 Multiply a `n x n` matrix by 1.2 (`1.2 * a`).  
 
