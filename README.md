@@ -31,7 +31,7 @@ Desktop: a commercial PC which type is "Lenovo Ren 7000K, 2021 version".
 | ---------- | ------------------------------------------------------------ |
 | Windows 11 | Version 22H2, Native running on the PC.                      |
 | WSL2       | Ubuntu 18.04, Running on Windows 11.                         |
-| Docker     | Desktop Version xx.xx, Backend is WSL2. Image is Nvidia HPC SDK 21.7, see [here](https://docs.nvidia.com/hpc-sdk/archive/21.7/index.html). |
+| Docker     | Desktop Version 24.0.6, Backend is WSL2. Image is Nvidia HPC SDK 21.7, see [here](https://docs.nvidia.com/hpc-sdk/archive/21.7/index.html). |
 
 + Environment
 
@@ -43,7 +43,7 @@ We use miniconda environment in our experiments.
 | PyTorch:           | 2.1.1, with CUDA 11.8 Runtime                                |
 | torchvision:       | 0.16.1                                                       |
 | torchaudio:        | 2.1.1                                                        |
-| torchtext:         |                                                              |
+| torchtext:         | 0.6.0                                                        |
 | pytorch-benchmark: | 0.3.6                                                        |
 | transformer:       | Built from source on commit with hash `3f69f415adcbdaedec154ba8eac220ef3276975d` |
 
@@ -63,7 +63,7 @@ sh setup_env.sh
 
 
 
-## 3. TFLOPS Benchmark
+## 3. TFLOPS & Bandwidth Benchmark
 
 **Goal:** Compare **basic calculation performance** differences on different environment.
 
@@ -103,11 +103,25 @@ Multiply a `n x n` matrix by 1.2 (`1.2 * a`).
 |        TFLOPS |   0.004 |    0.019 |     0.037 | 0.040     |
 |          GB/s |  34.424 |  148.973 |   292.299 | 323.464   |
 
-**Conclusion:** For three environments, there are no big difference in the TFLOPS and bandwidth performance. 
+**Conclusion:** For three environments, there are **no big difference** in the TFLOPS and bandwidth performance. 
 
 
 
 ## 4. Light Calculation Benchmark
+
+**Goal:** Compare **light-weight calculation performance** differences on different environment.
+
+**Method:** Timing for inference on light-weight models (ResNet18 and ResNet101), code is at first section of `torch_benchmark.py`.
+
+Results are at `results\<Env>.csv`. All tests are conducted with `batch_size = 32`, input shape `torch.Size[3, 224, 224]`
+
+|    Batch Time | ResNet18 (# param=11.7M) | ResNet101 (# param=44.5M) |
+| ------------: | -----------------------: | ------------------------: |
+| **Windows11** |   21.063 ms +/- 1.112 ms |    95.355 ms +/- 6.126 ms |
+|      **WSL2** | 20.552 ms +/- 479.427 us |  94.718 ms +/- 962.084 us |
+|    **Docker** | 21.453 ms +/- 501.774 us |  94.861 ms +/- 770.122 us |
+
+**Conclusion:** For three environments, there are **no big difference** in the performance of calculating some light weight tasks (Inference in ResNet18 and ResNet101). The Windows 11 has highest variance in computing.
 
 
 
