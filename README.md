@@ -107,7 +107,7 @@ Multiply a `n x n` matrix by 1.2 (`1.2 * a`).
 
 
 
-## 4. Light Calculation Benchmark
+## 4. Full precision CNN Benchmark
 
 **Goal:** Compare **light-weight calculation performance** differences on different environment.
 
@@ -125,7 +125,39 @@ Results are at `results\<Env>.csv`. All tests are conducted with `batch_size = 3
 
 
 
-## 5. Heavy Calculation Benchmark
+## 5. Half precision Language Models Benchmark
+
+**Goal:** Compare **heavy-weight calculation performance** differences on different environment.
+
+**Method:** Timing for a simple forward and backward calculation on one Bert layer, code is at first section of `micro_bench.py`.
+
+Results are at ``results\micro_bench-<Env>.ipynb`. 
+
+We used "bert-large-uncased" model from hugging face. One layer contains around 12M parameters.
+
+`batch` indicates the batch size. `seq_len` indicates the input sequence length. 
+
+We also provided benchmarks for other models such as GPT2 and T5. But since the results are generally same, we don't show them here.
+
+|              TFLOPS | batch=2 | batch=4 | batch=8 | batch=16 | batch=32 | batch=64 | batch=128 |
+| ------------------: | ------: | ------: | ------: | -------- | -------- | -------- | --------- |
+|       **Windows11** |         |         |         |          |          |          |           |
+|     fwd seq_len=128 |   3.497 |   7.054 |  14.589 | 16.263   | 16.538   | 17.016   | 16.941    |
+| fwd+bwd seq_len=128 |   3.910 |   7.888 |  15.973 | 18.015   | 18.770   | 19.375   | 19.572    |
+|     fwd seq_len=512 |  12.992 |  14.077 |  14.303 | 14.703   | 14.687   | 14.950   | 14.948    |
+| fwd+bwd seq_len=512 |  14.239 |  15.674 |  16.231 | 16.724   | 16.854   | 17.261   | 17.275    |
+|            **WSL2** |         |         |         |          |          |          |           |
+|     fwd seq_len=128 |   1.926 |   3.754 |  16.043 | 16.787   | 18.229   | 18.432   | 18.759    |
+| fwd+bwd seq_len=128 |   1.912 |  10.977 |  17.070 | 18.661   | 19.932   | 20.449   | 20.847    |
+|     fwd seq_len=512 |  13.967 |  14.522 |  15.617 | 15.735   | 16.088   | 15.834   | 15.939    |
+| fwd+bwd seq_len=512 |  14.952 |  16.232 |  17.197 | 17.578   | 17.824   | 18.155   | 17.830    |
+|          **Docker** |         |         |         |          |          |          |           |
+|     fwd seq_len=128 |   4.801 |   9.171 |  15.920 | 16.627   | 18.256   | 18.387   | 18.801    |
+| fwd+bwd seq_len=128 |   4.907 |  10.831 |  16.895 | 18.585   | 19.955   | 20.469   | 20.897    |
+|     fwd seq_len=512 |  14.029 |  14.547 |  15.659 | 15.763   | 16.060   | 15.939   | 15.934    |
+| fwd+bwd seq_len=512 |  14.990 |  16.256 |  17.228 | 17.611   | 17.910   | 18.160   | 17.844    |
+
+**Conclusion:** For three environments, there are **no big difference** on the performance. we can find that when batch size is large (e.g., 32, 64, 128), WSL2 and Docker are a little bit faster than the Windows11.
 
 
 
