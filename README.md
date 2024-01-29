@@ -107,7 +107,7 @@ Multiply a `n x n` matrix by 1.2 (`1.2 * a`).
 
 
 
-## 4. Full precision CNN Benchmark
+## 4. FP32 CNN Benchmark
 
 **Goal:** Compare **light-weight calculation performance** differences on different environment.
 
@@ -125,7 +125,7 @@ Results are at `results\<Env>.csv`. All tests are conducted with `batch_size = 3
 
 
 
-## 5. Half precision Language Models Benchmark
+## 5. FP16 Language Models Benchmark
 
 **Goal:** Compare **heavy-weight calculation performance** differences on different environment.
 
@@ -162,6 +162,22 @@ We also provided benchmarks for other models such as GPT2 and T5. But since the 
 
 
 ## 6. Transformer Training Benchmark
+
+**Goal:** Compare **overall training performance (i.e., testing GPU, CPU, Dick performance)** differences on different environment.
+
+**Method:** Timing to train a transformer-based fake-tweets analysis model, code is at `train_benchmark/`.
+
+Results are at ``results/<Env>.log`. 
+
+Please refer the training arguments at `train_benchmark\train_transformer.py line 46`.
+
+| Environment   | Training time (sec/epoch) |
+| ------------- | ------------------------- |
+| **Windows11** | 15.494774666666668        |
+| **WSL2**      | 15.522465533333333        |
+| **Docker**    | 14.362897466666665        |
+
+**Conclusion:** For three environments, there are **no big difference** on the performance. we can find that when batch size is large (e.g., 32, 64, 128), WSL2 and Docker are a little bit faster than the Windows11.
 
 
 
