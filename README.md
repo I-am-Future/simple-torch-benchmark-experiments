@@ -69,7 +69,7 @@ sh setup_env.sh
 
 **Method:** Timing for basic tensor operations, code is at first section of `micro_bench.ipynb`.
 
-Results are at `results\micro_bench-<Env>.ipynb`.
+Results are at `results/micro_bench-<Env>.ipynb`.
 
 + Results (Matrix Multiplication):
 
@@ -113,7 +113,7 @@ Multiply a `n x n` matrix by 1.2 (`1.2 * a`).
 
 **Method:** Timing for inference on light-weight models (ResNet18 and ResNet101), code is at first section of `torch_benchmark.py`.
 
-Results are at `results\<Env>.csv`. All tests are conducted with `batch_size = 32`, input shape `torch.Size[3, 224, 224]`
+Results are at `results/<Env>.csv`. All tests are conducted with `batch_size = 32`, input shape `torch.Size[3, 224, 224]`
 
 |    Batch Time | ResNet18 (# param=11.7M) | ResNet101 (# param=44.5M) |
 | ------------: | -----------------------: | ------------------------: |
@@ -131,7 +131,7 @@ Results are at `results\<Env>.csv`. All tests are conducted with `batch_size = 3
 
 **Method:** Timing for a simple forward and backward calculation on one Bert layer, code is at first section of `micro_bench.py`.
 
-Results are at ``results\micro_bench-<Env>.ipynb`. 
+Results are at ``results/micro_bench-<Env>.ipynb`. 
 
 We used "bert-large-uncased" model from hugging face. One layer contains around 12M parameters.
 
@@ -169,15 +169,15 @@ We also provided benchmarks for other models such as GPT2 and T5. But since the 
 
 Results are at ``results/<Env>.log`. 
 
-Please refer the training arguments at `train_benchmark\train_transformer.py line 46`.
+Please refer the training arguments at `train_benchmark/train_transformer.py line 46`.
 
-| Environment   | Training time (sec/epoch) |
-| ------------- | ------------------------- |
-| **Windows11** | 15.494774666666668        |
-| **WSL2**      | 15.522465533333333        |
-| **Docker**    | 14.362897466666665        |
+| Environment   | Training time (sec / epoch) |
+| ------------- | --------------------------- |
+| **Windows11** | 15.50                       |
+| **WSL2**      | 15.52                       |
+| **Docker**    | 14.36                       |
 
-**Conclusion:** For three environments, there are **no big difference** on the performance. we can find that when batch size is large (e.g., 32, 64, 128), WSL2 and Docker are a little bit faster than the Windows11.
+**Conclusion:** For three environments, there are **no big difference** on the performance. 
 
 
 
