@@ -1,6 +1,6 @@
 # Simple PyTorch Benchmark Experiments
 
-This repo is used to answer a question puzzled me for long time: **Do WSL2 and Docker have computation performance lost in PyTorch compared to Native Windows?**
+This repo is used to answer a question puzzled me for long time: **Do WSL2 and Docker have computation performance lost in PyTorch compared to Native Windows?** (Short answer: No!)
 
 The answer is crucial because for many students and normal users, they don't have Linux environment. But some models are only available on Linux platform. We want to figure out if we have performance lost when we run the model on WSL2/Docker on Windows.
 
@@ -183,3 +183,8 @@ Please refer the training arguments at `train_benchmark/train_transformer.py lin
 
 ## 7. Conclusion
 
+Whether on simple TFLOPS benchmarks, or FP16/FP32 calculation on light-weight models, or full-scale transformer training, there are no big performance difference among three environments, Windows11, WSL2 and Docker. 
+
+This is probably because modern WSL2 runs on hardware virtualization, which has fewer overheads. In addition, since Docker runs on WSL2 backend, so Docker has similar performance as WSL2. 
+
+Therefore, for Windows users, they can use WSL2 and Docker as deep learning environments without concerns for performance loss. 
