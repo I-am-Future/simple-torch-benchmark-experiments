@@ -86,6 +86,9 @@ Multiply two `n x n` matrices (`a @ b`).
 |    **Docker** |       |        |        |        |
 | torch.float32 | 0.203 |  5.546 |  7.391 | 9.304  |
 | torch.float16 | 0.055 |  9.246 | 24.469 | 26.654 |
+|    **Ubuntu** |       |        |        |        |
+| torch.float32 | 0.458 |  5.663 |  7.371 | 9.332  |
+| torch.float16 | 0.421 | 15.881 | 24.493 | 26.747 |
 
 + Results (Element-wise Matrix Multiplication):
 
@@ -102,6 +105,9 @@ Multiply a `n x n` matrix by 1.2 (`1.2 * a`).
 |    **Docker** |         |          |           |           |
 |        TFLOPS |   0.004 |    0.019 |     0.037 | 0.040     |
 |          GB/s |  34.424 |  148.973 |   292.299 | 323.464   |
+|    **Ubuntu** |         |          |           |           |
+|        TFLOPS |   0.008 |    0.033 |     0.039 | 0.041     |
+|          GB/s |  66.538 |  266.539 |   308.106 | 326.032   |
 
 **Conclusion:** For three environments, there are **no big difference** in the TFLOPS and bandwidth performance. 
 
@@ -120,6 +126,7 @@ Results are at `results/<Env>.csv`. All tests are conducted with `batch_size = 3
 | **Windows11** |   21.063 ms +/- 1.112 ms |    95.355 ms +/- 6.126 ms |
 |      **WSL2** | 20.552 ms +/- 479.427 us |  94.718 ms +/- 962.084 us |
 |    **Docker** | 21.453 ms +/- 501.774 us |  94.861 ms +/- 770.122 us |
+|     **Ubuntu**| 19.720 ms +/- 324.590 us |  92.868 ms +/- 647.184 us |
 
 **Conclusion:** For three environments, there are **no big difference** in the performance of calculating some light weight tasks (Inference in ResNet18 and ResNet101). The Windows 11 has highest variance in computing.
 
@@ -156,6 +163,11 @@ We also provided benchmarks for other models such as GPT2 and T5. But since the 
 | fwd+bwd seq_len=128 |   4.907 |  10.831 |  16.895 | 18.585   | 19.955   | 20.469   | 20.897    |
 |     fwd seq_len=512 |  14.029 |  14.547 |  15.659 | 15.763   | 16.060   | 15.939   | 15.934    |
 | fwd+bwd seq_len=512 |  14.990 |  16.256 |  17.228 | 17.611   | 17.910   | 18.160   | 17.844    |
+|          **Ubuntu** |         |         |         |          |          |          |           |
+|     fwd seq_len=128 |   7.644 |  14.218 |  16.340 | 16.903   | 18.268   | 18.421   | 18.806    |
+| fwd+bwd seq_len=128 |   8.729 |  14.787 |  17.422 | 18.894   | 20.032   | 20.485   | 20.889    |
+|     fwd seq_len=512 |  14.176 |  14.588 |  15.651 | 15.786   | 16.058   | 15.929   | 15.963    |
+| fwd+bwd seq_len=512 |  15.240 |  16.371 |  17.264 | 17.623   | 17.852   | 18.174   | 17.842    |
 
 **Conclusion:** For three environments, there are **no big difference** on the performance. we can find that when batch size is large (e.g., 32, 64, 128), WSL2 and Docker are a little bit faster than the Windows11.
 
@@ -176,6 +188,7 @@ Please refer the training arguments at `train_benchmark/train_transformer.py lin
 | **Windows11** | 15.50                       |
 | **WSL2**      | 15.52                       |
 | **Docker**    | 14.36                       |
+| **Ubuntu**    |  7.41                       |
 
 **Conclusion:** For three environments, there are **no big difference** on the performance. 
 
