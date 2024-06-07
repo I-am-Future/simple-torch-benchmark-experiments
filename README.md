@@ -89,6 +89,10 @@ Multiply two `n x n` matrices (`a @ b`).
 |    **Ubuntu** |       |        |        |        |
 | torch.float32 | 0.458 |  5.663 |  7.371 | 9.332  |
 | torch.float16 | 0.421 | 15.881 | 24.493 | 26.747 |
+|**Ubuntu RTX4070**|       |        |        |        |
+| torch.float32 | 0.437 | 12.101 | 18.229 | 23.469 |
+| torch.float16 | 0.417 | 25.555 | 65.832 | 73.204 |
+
 
 + Results (Element-wise Matrix Multiplication):
 
@@ -108,6 +112,9 @@ Multiply a `n x n` matrix by 1.2 (`1.2 * a`).
 |    **Ubuntu** |         |          |           |           |
 |        TFLOPS |   0.008 |    0.033 |     0.039 | 0.041     |
 |          GB/s |  66.538 |  266.539 |   308.106 | 326.032   |
+|**Ubuntu RTX4070**|         |          |           |           |
+|        TFLOPS |   0.008 |    0.033 |     0.125 | 0.308     |
+|          GB/s |  64.483 |  260.193 |  1002.404 | 2460.792  |
 
 **Conclusion:** For three environments, there are **no big difference** in the TFLOPS and bandwidth performance. 
 
@@ -127,6 +134,7 @@ Results are at `results/<Env>.csv`. All tests are conducted with `batch_size = 3
 |      **WSL2** | 20.552 ms +/- 479.427 us |  94.718 ms +/- 962.084 us |
 |    **Docker** | 21.453 ms +/- 501.774 us |  94.861 ms +/- 770.122 us |
 |     **Ubuntu**| 19.720 ms +/- 324.590 us |  92.868 ms +/- 647.184 us |
+|**Ubuntu RTX4070**|  8.958 ms +/- 375.590 us |  42.062 ms +/- 1.167 ms |
 
 **Conclusion:** For three environments, there are **no big difference** in the performance of calculating some light weight tasks (Inference in ResNet18 and ResNet101). The Windows 11 has highest variance in computing.
 
@@ -168,6 +176,11 @@ We also provided benchmarks for other models such as GPT2 and T5. But since the 
 | fwd+bwd seq_len=128 |   8.729 |  14.787 |  17.422 | 18.894   | 20.032   | 20.485   | 20.889    |
 |     fwd seq_len=512 |  14.176 |  14.588 |  15.651 | 15.786   | 16.058   | 15.929   | 15.963    |
 | fwd+bwd seq_len=512 |  15.240 |  16.371 |  17.264 | 17.623   | 17.852   | 18.174   | 17.842    |
+|**Ubuntu RTX4070**|         |         |         |          |          |          |           |
+|     fwd seq_len=128 |   7.729 |  15.704 |  31.825 | 46.342   | 45.064   | 42.844   | 39.796    |
+| fwd+bwd seq_len=128 |   9.897 |  18.135 |  35.852 | 48.900   | 51.299   | 47.929   | 44.751    |
+|     fwd seq_len=512 |  33.561 |  32.855 |  31.236 | 31.399   | 30.255   | 30.632   | 30.698    |
+| fwd+bwd seq_len=512 |  35.946 |  35.864 |  35.142 | 35.234   | 34.212   | 34.591   | 34.372    |
 
 **Conclusion:** For three environments, there are **no big difference** on the performance. we can find that when batch size is large (e.g., 32, 64, 128), WSL2 and Docker are a little bit faster than the Windows11.
 
@@ -189,6 +202,8 @@ Please refer the training arguments at `train_benchmark/train_transformer.py lin
 | **WSL2**      | 15.52                       |
 | **Docker**    | 14.36                       |
 | **Ubuntu**    |  7.41                       |
+| **Ubuntu-RTX4070**    |  7.41                       |
+
 
 **Conclusion:** For three environments, there are **no big difference** on the performance. 
 

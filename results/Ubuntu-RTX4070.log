@@ -1,0 +1,23 @@
+2024-06-01 21:37:56,254 - root - INFO - Initializing configs...
+2024-06-01 21:37:56,254 - root - INFO - The configs are: {'work_dir': '.', 'device': 'cuda:0', 'batch_size': 16, 'num_workers': 2, 'train_ratio': 0.7, 'optimizer_config': {'lr': 0.0005}, 'scheduler_config': {'T_max': 100, 'eta_min': 5e-05, 'last_epoch': -1, 'warmup_steps': 5, 'warmup_start_lr': 1e-05}, 'total_epoch': 15, 'glove_name': '6B', 'glove_dim': 200, 'model_config': {'hidden_units': 200, 'num_layers': 8, 'dropout_rate': 0.25}, 'enable_tb': False}
+2024-06-01 21:37:56,254 - torchtext.vocab - INFO - Downloading vectors from http://nlp.stanford.edu/data/glove.6B.zip
+2024-06-01 21:42:04,835 - torchtext.vocab - INFO - Extracting vectors into .vector_cache
+2024-06-01 21:42:19,105 - torchtext.vocab - INFO - Loading vectors from .vector_cache/glove.6B.200d.txt
+2024-06-01 21:42:46,203 - torchtext.vocab - INFO - Saving vectors to .vector_cache/glove.6B.200d.txt.pt
+2024-06-01 21:42:50,750 - root - INFO - Total parameters: 7864585
+2024-06-01 21:42:50,751 - root - INFO - Begin training now...
+2024-06-01 21:42:58,776 - root - INFO - epoch 1/15, duration=7.520857s train_loss=0.7070, train_acc=0.5339, val_loss=0.6825, val_acc=0.5841, saving model.
+2024-06-01 21:43:06,238 - root - INFO - epoch 2/15, duration=7.461083s train_loss=0.6889, train_acc=0.5600, val_loss=0.6812, val_acc=0.5841, 
+2024-06-01 21:43:13,659 - root - INFO - epoch 3/15, duration=7.420718s train_loss=0.6871, train_acc=0.5645, val_loss=0.6833, val_acc=0.5841, 
+2024-06-01 21:43:21,093 - root - INFO - epoch 4/15, duration=7.433672s train_loss=0.6906, train_acc=0.5553, val_loss=0.6803, val_acc=0.5841, 
+2024-06-01 21:43:28,495 - root - INFO - epoch 5/15, duration=7.400891s train_loss=0.6900, train_acc=0.5579, val_loss=0.6806, val_acc=0.5841, 
+2024-06-01 21:43:35,939 - root - INFO - epoch 6/15, duration=7.444587s train_loss=0.6926, train_acc=0.5577, val_loss=0.6829, val_acc=0.5841, 
+2024-06-01 21:43:43,388 - root - INFO - epoch 7/15, duration=7.447624s train_loss=0.6985, train_acc=0.5408, val_loss=0.6926, val_acc=0.5841, 
+2024-06-01 21:43:50,811 - root - INFO - epoch 8/15, duration=7.422345s train_loss=0.6907, train_acc=0.5566, val_loss=0.6852, val_acc=0.5841, 
+2024-06-01 21:43:58,185 - root - INFO - epoch 9/15, duration=7.373972s train_loss=0.6902, train_acc=0.5540, val_loss=0.6982, val_acc=0.4159, 
+2024-06-01 21:44:05,564 - root - INFO - epoch 10/15, duration=7.378146s train_loss=0.6894, train_acc=0.5573, val_loss=0.6816, val_acc=0.5841, 
+2024-06-01 21:44:13,059 - root - INFO - epoch 11/15, duration=7.49456s train_loss=0.6893, train_acc=0.5577, val_loss=0.6808, val_acc=0.5841, 
+2024-06-01 21:44:20,487 - root - INFO - epoch 12/15, duration=7.428174s train_loss=0.6889, train_acc=0.5639, val_loss=0.6804, val_acc=0.5841, 
+2024-06-01 21:44:27,899 - root - INFO - epoch 13/15, duration=7.41131s train_loss=0.6897, train_acc=0.5648, val_loss=0.6824, val_acc=0.5841, 
+2024-06-01 21:44:35,314 - root - INFO - epoch 14/15, duration=7.414958s train_loss=0.6882, train_acc=0.5592, val_loss=0.6815, val_acc=0.5841, 
+2024-06-01 21:44:42,731 - root - INFO - epoch 15/15, duration=7.415982s train_loss=0.6888, train_acc=0.5631, val_loss=0.6811, val_acc=0.5841, 
